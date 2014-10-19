@@ -6,14 +6,16 @@ object Test extends App {
 
   def writeToFile(filePath: String, data: String): Unit = {
     val pw = new java.io.PrintWriter(new File(filePath))
-    try pw.write(data) finally pw.close()
+    try {
+      pw.write(data) 
+    } finally {
+      pw.close()
+    }
   }
 
   def printToFile(f: File)(data: String) {
-    println(s"#1 $f")
     val fileWriter = new FileWriter(f)
     try {
-    println(s"#2 $data")
       fileWriter.write(data)
     } finally {
       fileWriter.close()
@@ -21,9 +23,9 @@ object Test extends App {
   }
 
   override def main(args: Array[String]) {
-  val testData = """This is a test sentence to test the WordAlignedChunkReader and see if it cuts 
-of the lines in the correct position. We also need to see if the whole file is 
-processed. A very exiting test. At least I think it is as this has been bugging 
+  val testData = """This is a test sentence to test the WordAlignedChunkReader and see if it cuts
+of the lines in the correct position. We also need to see if the whole file is
+processed. A very exiting test. At least I think it is as this has been bugging
 me for a while."""
 
     val filePath = "test.dat"
@@ -33,13 +35,11 @@ me for a while."""
       throw new IOException(s"File does not exist or is not a file [$filePath]")
     }
     
-    //printToFile(new File(filePath)) { testData }
+    printToFile(new File(filePath)) { testData }
     println(s"testData=$testData")
-    writeToFile(filePath, testData)
+    //writeToFile(filePath, testData)
 
-   // println(s"File ${file.getAbsolutePath}")
-
-    val chunkSize = 60
+    val chunkSize = 55
     var numOfChunks = (file.length / chunkSize).toInt
     val restChunkSize = file.length % chunkSize
 
