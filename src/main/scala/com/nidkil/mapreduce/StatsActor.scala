@@ -1,7 +1,8 @@
-package nl.newparadigm.mapreduce
+package com.nidkil.mapreduce
 
-import akka.actor.{ Actor, ActorSystem, Props }
-import nl.newparadigm.utils.Timer
+import com.nidkil.utils.Timer
+
+import akka.actor.Actor
 
 class StatsActor extends Actor {
 

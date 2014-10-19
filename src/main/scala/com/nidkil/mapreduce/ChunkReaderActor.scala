@@ -1,8 +1,10 @@
-package nl.newparadigm.mapreduce
+package com.nidkil.mapreduce
 
-import akka.actor.{ ActorRef, Actor, ActorSystem, Props }
-import java.io.{ File, IOException, RandomAccessFile }
-import java.nio.channels.FileChannel
+import com.nidkil.utils.WordAlignedChunkReader
+
+import akka.actor.Actor
+import akka.actor.ActorRef
+import akka.actor.actorRef2Scala
 
 class ChunkReaderActor(localAgg: ActorRef) extends Actor {
 
