@@ -1,4 +1,4 @@
-package nl.newparadigm.mapreduce
+package com.nidkil.mapreduce
 
 import akka.actor.{ Actor, ActorSystem, PoisonPill, Props }
 import akka.routing.{ Broadcast, RoundRobinRouter }

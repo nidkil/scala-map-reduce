@@ -1,4 +1,4 @@
-package nl.newparadigm.mapreduce
+package com.nidkil.utils
 
 import java.io.{ Closeable, File, IOException, RandomAccessFile }
 import java.nio.{ ByteBuffer, CharBuffer, MappedByteBuffer }

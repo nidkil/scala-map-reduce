@@ -1,6 +1,5 @@
-package nl.newparadigm.mapreduce
-
-import java.io.{ File, FileWriter, IOException, PrintWriter }
+import java.io.{File, FileWriter, IOException}
+import com.nidkil.utils.WordAlignedChunkReader
 
 object Test extends App {
 

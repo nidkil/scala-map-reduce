@@ -1,4 +1,4 @@
-package nl.newparadigm.mapreduce
+package com.nidkil.mapreduce
 
 import akka.actor.{ ActorSystem, Props }
 import com.typesafe.config.ConfigFactory

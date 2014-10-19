@@ -1,4 +1,4 @@
-package nl.newparadigm.utils
+package com.nidkil.utils
 
 class Timer {
 
