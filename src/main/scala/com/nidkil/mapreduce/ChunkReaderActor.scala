@@ -1,6 +1,6 @@
 package com.nidkil.mapreduce
 
-import com.nidkil.utils.WordAlignedChunkReader
+import com.nidkil.utils.WordBoundryChunkReader
 
 import akka.actor.Actor
 import akka.actor.ActorRef
@@ -10,7 +10,7 @@ class ChunkReaderActor(localAgg: ActorRef) extends Actor {
 
   def receive = {
     case chunk: Chunk => {
-      val reader = new WordAlignedChunkReader(chunk.filePath, chunk.id, chunk.start, chunk.end, chunk.size)
+      val reader = new WordBoundryChunkReader(chunk)
 
       //TODO Remove "leestekens", EOL, etc.
       // Send chunk
