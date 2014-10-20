@@ -1,12 +1,14 @@
 package com.nidkil.mapreduce
 
-import akka.actor.{ Actor, ActorSystem, PoisonPill, Props }
-import akka.routing.{ Broadcast, RoundRobinRouter }
+import java.io.File
+import java.io.IOException
 
-import java.io.{ File, IOException, RandomAccessFile }
-import java.nio.channels.FileChannel
-
-case class Chunk(id: Int, filePath : String, start : Long, end: Long, size: Int)
+import akka.actor.Actor
+import akka.actor.ActorSystem
+import akka.actor.Props
+import akka.actor.actorRef2Scala
+import akka.routing.Broadcast
+import akka.routing.RoundRobinRouter
 
 class ChunkGeneratorActor extends Actor {
 
