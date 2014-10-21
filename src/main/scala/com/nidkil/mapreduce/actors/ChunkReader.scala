@@ -7,14 +7,14 @@ import akka.actor.actorRef2Scala
 import com.nidkil.splitter.Chunk
 import akka.actor.ActorLogging
 
-object ChunkReaderActor {
+object ChunkReader {
   case class ProcessChunk(chunk: Chunk)
 }
 
-class ChunkReaderActor(sanatizeAndSplit: ActorRef) extends Actor with ActorLogging {
+class ChunkReader(sanatizeAndSplit: ActorRef) extends Actor with ActorLogging {
 
-  import ChunkReaderActor._
-  import SanatizeSplitGroupActor._
+  import ChunkReader._
+  import SanatizeSplitGroup._
 
   def receive = {
     case processChunk: ProcessChunk => {

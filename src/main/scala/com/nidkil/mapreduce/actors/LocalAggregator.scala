@@ -3,14 +3,14 @@ package com.nidkil.mapreduce.actors
 import akka.actor.{ Actor, ActorRef }
 import akka.actor.ActorLogging
 
-object LocalAggregatorActor {
+object LocalAggregator {
   case class AggregateCountMap(countMap: Map[String, Array[String]])
 }
 
-class LocalAggregatorActor(globalAgg: ActorRef) extends Actor with ActorLogging {
+class LocalAggregator(globalAgg: ActorRef) extends Actor with ActorLogging {
 
-  import LocalAggregatorActor._
-  import CountAggregatorActor._
+  import LocalAggregator._
+  import CountAggregator._
 
   val wordCountMap = scala.collection.mutable.Map[String, Int]()
   
