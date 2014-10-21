@@ -4,15 +4,15 @@ import com.nidkil.utils.Timer
 import akka.actor.Actor
 import akka.actor.ActorLogging
 
-object StatsActor {
+object Stats {
   case class StartTimer()  
   case class StopTimer()
   case class PrintExecTime()
 }
 
-class StatsActor extends Actor with ActorLogging {
+class Stats extends Actor with ActorLogging {
 
-  import StatsActor._
+  import Stats._
 
   private lazy val timer = new Timer()
 

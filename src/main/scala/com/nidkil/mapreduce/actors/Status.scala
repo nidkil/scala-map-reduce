@@ -6,14 +6,14 @@ import akka.actor.ActorRef
 import com.nidkil.splitter.Chunk
 import akka.actor.ActorLogging
 
-object StatusActor {
+object Status {
   case class ChunkCompleted()
 }
 
-class StatusActor(test: ActorRef, chunkCount: Int) extends Actor with ActorLogging {
+class Status(test: ActorRef, chunkCount: Int) extends Actor with ActorLogging {
 
-  import ChunkGeneratorActor._
-  import StatusActor._
+  import Controller._
+  import Status._
   
   lazy val originalSender = context.sender
   var chunksCompleted = 0;

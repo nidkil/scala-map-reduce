@@ -5,14 +5,14 @@ import akka.actor.ActorRef
 import akka.actor.actorRef2Scala
 import akka.actor.ActorLogging
 
-object SanatizeSplitGroupActor {
+object SanatizeSplitGroup {
   case class Sanatize(text: String)
 }
 
-class SanatizeSplitGroupActor(localAgg: ActorRef) extends Actor with ActorLogging {
+class SanatizeSplitGroup(localAgg: ActorRef) extends Actor with ActorLogging {
 
-  import LocalAggregatorActor._
-  import SanatizeSplitGroupActor._
+  import LocalAggregator._
+  import SanatizeSplitGroup._
   
   def receive = {
     case sanatize: Sanatize => {

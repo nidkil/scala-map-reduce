@@ -14,17 +14,17 @@ import akka.routing.RoundRobinRouter
 import akka.actor.ActorSystem
 import akka.actor.ActorLogging
 
-object ChunkGeneratorActor {
+object Controller {
   case class Start(filePath: String)
   case class Completed()
 }
 
-class ChunkGeneratorActor extends Actor with ActorLogging {
+class Controller extends Actor with ActorLogging {
 
-  import CountAggregatorActor._
-  import ChunkGeneratorActor._
-  import ChunkReaderActor._
-  import StatsActor._
+  import CountAggregator._
+  import Controller._
+  import ChunkReader._
+  import Stats._
 
   var numChunks = 0
   var router, stats, countAggr: ActorRef = null
@@ -39,7 +39,7 @@ class ChunkGeneratorActor extends Actor with ActorLogging {
         throw new IOException(s"File does not exist or is not a file [${start.filePath}]")
       }
 
-      stats = context.actorOf(Props(new StatsActor), "stats")
+      stats = context.actorOf(Props(new Stats), "stats")
 
       stats ! StartTimer()
 
@@ -48,11 +48,11 @@ class ChunkGeneratorActor extends Actor with ActorLogging {
 
       numChunks = chunks.size
 
-      val status = context.actorOf(Props(new StatusActor(context.self, numChunks)), "status")
-      countAggr = context.actorOf(Props(new CountAggregatorActor(status)), "countAggregator")
-      val localAggr = context.actorOf(Props(new LocalAggregatorActor(countAggr)), "localAggregator")
-      val sanatizeSplitGroup = context.actorOf(Props(new SanatizeSplitGroupActor(localAggr)), "sanatizeSplitGroup")
-      router = context.actorOf(Props(new ChunkReaderActor(sanatizeSplitGroup)).withRouter(RoundRobinRouter(nrOfInstances = 8)), "chunkReader")
+      val status = context.actorOf(Props(new Status(context.self, numChunks)), "status")
+      countAggr = context.actorOf(Props(new CountAggregator(status)), "countAggregator")
+      val localAggr = context.actorOf(Props(new LocalAggregator(countAggr)), "localAggregator")
+      val sanatizeSplitGroup = context.actorOf(Props(new SanatizeSplitGroup(localAggr)), "sanatizeSplitGroup")
+      router = context.actorOf(Props(new ChunkReader(sanatizeSplitGroup)).withRouter(RoundRobinRouter(nrOfInstances = 8)), "chunkReader")
 
       chunks.foreach(router ! new ProcessChunk(_))
 

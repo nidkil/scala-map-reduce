@@ -5,15 +5,15 @@ import scala.collection.mutable.Map
 import akka.actor.ActorRef
 import akka.actor.ActorLogging
 
-object CountAggregatorActor {
+object CountAggregator {
   case class Aggregate(localWordCntMap: Map[String, Int])
   case class PrintWordCntMap()
 }
 
-class CountAggregatorActor(status: ActorRef) extends Actor with ActorLogging {
+class CountAggregator(status: ActorRef) extends Actor with ActorLogging {
 
-  import CountAggregatorActor._
-  import StatusActor._
+  import CountAggregator._
+  import Status._
   
   val wordCntMap = Map[String, Int]()
   var count: Integer = 0;
