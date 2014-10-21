@@ -4,7 +4,7 @@ import java.io.{ Closeable, File, IOException, RandomAccessFile }
 import java.nio.{ ByteBuffer, CharBuffer, MappedByteBuffer }
 import java.nio.channels.FileChannel
 import java.nio.charset.Charset
-import com.nidkil.mapreduce.Chunk
+import com.nidkil.splitter.Chunk
 
 /**
  * This implementation uses memory mapped files. Memory mapped files are special

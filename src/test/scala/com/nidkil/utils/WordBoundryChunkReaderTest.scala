@@ -6,7 +6,7 @@ import java.io.IOException
 import org.scalatest.BeforeAndAfterEach
 import org.scalatest.FunSpec
 import org.scalatest.Matchers
-import com.nidkil.mapreduce.Chunk
+import com.nidkil.splitter.Chunk
 import com.nidkil.splitter.DefaultSplitter
 import scala.collection.mutable.LinkedHashSet
 import org.scalatest.BeforeAndAfterAll
