@@ -5,9 +5,9 @@ import akka.actor.Actor
 import akka.actor.ActorLogging
 
 object Stats {
-  case class StartTimer()  
-  case class StopTimer()
-  case class PrintExecTime()
+  case object StartTimer
+  case object StopTimer
+  case object GetExecTime
 }
 
 class Stats extends Actor with ActorLogging {
@@ -17,17 +17,19 @@ class Stats extends Actor with ActorLogging {
   private lazy val timer = new Timer()
 
   def receive = {
-    case startTimer : StartTimer => {
+    case StartTimer => {
       log.info("Received startTimer")      
       timer.start()
+      sender ! "started"
     }
-    case stopTimer: StopTimer => {
+    case StopTimer => {
       log.info("Received stopTimer")      
       timer.stop()
+      sender ! "stopped"
     }
-    case printExecTime: PrintExecTime => {
+    case GetExecTime => {
       log.info("Received printExecTime")      
-      println(s"Execution time ==> ${timer.execTime(false)}")
+      sender ! timer.execTime(false)
     }
     case x => log.warning(s" +++ Unknown message received by ${self.path} [${x.getClass}, value=$x]")
   }
