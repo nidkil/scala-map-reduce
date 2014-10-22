@@ -7,7 +7,7 @@ import com.nidkil.splitter.Chunk
 import akka.actor.ActorLogging
 
 object Status {
-  case class ChunkCompleted()
+  case object ChunkCompleted
 }
 
 class Status(test: ActorRef, chunkCount: Int) extends Actor with ActorLogging {
@@ -19,13 +19,13 @@ class Status(test: ActorRef, chunkCount: Int) extends Actor with ActorLogging {
   var chunksCompleted = 0;
 
   def receive = {
-    case chunkCompleted: ChunkCompleted => {
+    case ChunkCompleted => {
       log.info(s"Received ThreadCompleted [chunkCount=$chunkCount, chunksCompleted=${chunksCompleted + 1}, test=${test.path}, sender=${sender.path.parent}, originalSender=${originalSender.path}]")
       
       chunksCompleted += 1
 
       //TODO How to send response to sender
-      if (chunkCount == chunksCompleted) test ! new Completed()
+      if (chunkCount == chunksCompleted) test ! Completed
     }
     case x => log.warning(s"Unknown message received by ${self.path} [${x.getClass}, value=$x]")
   }
